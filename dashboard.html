@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>לוח ניהול | Lihi Vintage</title>
+  <meta name="description" content="לוח ניהול לבעלות החנות לניהול פריטי וינטג׳ והזמנות לאיסוף.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard-body">
+  <a class="skip-link" href="#dashboard-main">דלגי לתוכן הניהול</a>
+
+  <header class="dashboard-header">
+    <div>
+      <p class="eyebrow">כלי ניהול</p>
+      <h1>לוח הניהול של Lihi Vintage</h1>
+      <p>העלי פריטים חדשים, נהלי את המלאי ועקבי אחרי הזמנות שממתינות לאיסוף.</p>
+    </div>
+    <a class="button button-secondary" href="index.html">חזרה לחנות</a>
+  </header>
+
+  <main id="dashboard-main" class="dashboard-main">
+    <section class="dashboard-panel" aria-labelledby="upload-heading">
+      <div class="section-heading">
+        <p class="section-kicker">פריט חדש</p>
+        <h2 id="upload-heading">הוספת פריט יחיד במינו</h2>
+      </div>
+
+      <form id="listing-form" class="dashboard-form">
+        <label>
+          <span>כותרת</span>
+          <input name="title" type="text" required>
+        </label>
+
+        <label>
+          <span>קטגוריה</span>
+          <input name="category" type="text" placeholder="דנים, וורקוור, אקססוריז" required>
+        </label>
+
+        <label>
+          <span>סגנון / תקופה</span>
+          <input name="era" type="text" placeholder="70s, 80s, Y2K" required>
+        </label>
+
+        <label>
+          <span>מידה</span>
+          <input name="size" type="text" placeholder="S, M, 30W" required>
+        </label>
+
+        <label>
+          <span>מצב</span>
+          <select name="condition" required>
+            <option value="Excellent">מצוין</option>
+            <option value="Very Good">טוב מאוד</option>
+            <option value="Good">טוב</option>
+            <option value="Worn In">משומש היטב</option>
+          </select>
+        </label>
+
+        <label>
+          <span>מחיר</span>
+          <input name="price" type="number" min="0" step="1" required>
+        </label>
+
+        <label>
+          <span>קישור לתמונה</span>
+          <input name="image" type="url" placeholder="https://example.com/item.jpg" required>
+        </label>
+
+        <label class="dashboard-full-width">
+          <span>תיאור</span>
+          <textarea name="description" rows="4" required></textarea>
+        </label>
+
+        <div class="dashboard-full-width dialog-actions">
+          <button class="button button-primary" type="submit">שמירת פריט</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="dashboard-panel inventory-panel" aria-labelledby="inventory-heading">
+      <div class="section-heading">
+        <p class="section-kicker">מלאי</p>
+        <h2 id="inventory-heading">ניהול פריטים</h2>
+      </div>
+      <div id="inventory-editor" hidden></div>
+      <div id="inventory-table-wrapper" class="table-wrapper"></div>
+    </section>
+
+    <section class="dashboard-panel" aria-labelledby="orders-heading">
+      <div class="section-heading">
+        <p class="section-kicker">הזמנות</p>
+        <h2 id="orders-heading">ממתינות לאיסוף</h2>
+      </div>
+      <div id="orders-table-wrapper" class="table-wrapper"></div>
+    </section>
+  </main>
+
+  <dialog id="consent-dialog" class="consent-dialog" aria-labelledby="consent-title" aria-describedby="consent-description consent-note">
+    <form method="dialog" class="consent-dialog__panel">
+      <div class="consent-banner__content">
+        <h2 id="consent-title">שימוש ב־Cookies ובאחסון מקומי</h2>
+        <p id="consent-description">
+          האתר משתמש באחסון מקומי לצורך תפעול חיוני של המלאי, ההזמנות ושמירת העדפות בסיסיות.
+        </p>
+        <p id="consent-note" class="consent-banner__note">
+          לחיצה על "דחייה" תדחה שימושים לא חיוניים בלבד. פעולות חיוניות של האתר ימשיכו לעבוד.
+        </p>
+      </div>
+      <div class="consent-banner__actions">
+        <button class="button button-secondary" type="submit" value="essential_only">דחייה</button>
+        <button class="button button-primary" type="submit" value="accepted">אישור</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script>
+    (function () {
+      const storageKey = "lihi-market-cookie-consent";
+      const dialog = document.getElementById("consent-dialog");
+
+      if (!dialog) {
+        return;
+      }
+
+      function saveChoice(choice) {
+        try {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify({
+              choice: choice,
+              updatedAt: new Date().toISOString()
+            })
+          );
+        } catch (error) {}
+      }
+
+      try {
+        if (localStorage.getItem(storageKey)) {
+          return;
+        }
+      } catch (error) {}
+
+      dialog.addEventListener("close", function () {
+        document.body.classList.remove("modal-open");
+        if (dialog.returnValue === "accepted" || dialog.returnValue === "essential_only") {
+          saveChoice(dialog.returnValue);
+        }
+      });
+
+      if (typeof dialog.showModal === "function") {
+        document.body.classList.add("modal-open");
+        dialog.showModal();
+      } else {
+        document.body.classList.add("modal-open");
+        dialog.setAttribute("open", "open");
+      }
+    })();
+  </script>
+
+  <script src="sheet-config.js"></script>
+  <script src="sheet-data.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
