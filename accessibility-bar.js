@@ -42,8 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.4);
-            backdrop-filter: blur(2px);
+            background: rgba(26, 20, 16, 0.7);
             z-index: 10001;
             opacity: 0;
             visibility: hidden;
@@ -99,9 +98,19 @@
         .acc-close {
             background: none;
             border: none;
-            font-size: 18px;
+            font-size: 24px;
             cursor: pointer;
-            color: #999;
+            color: var(--primary-color, #5d4037);
+            transition: var(--transition, all 0.3s);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+        }
+
+        .acc-close:hover {
+            color: var(--accent-color, #825e3c);
+            transform: scale(1.1);
         }
 
         .acc-grid {
@@ -151,28 +160,66 @@
 
         .acc-reset {
             grid-column: span 2;
-            background-color: #ff4d4d;
+            background-color: var(--primary-light, #8d6e63);
             color: #fff;
             border: none;
             margin-top: 5px;
             padding: 10px !important;
+            border-radius: 8px;
+            font-weight: 700;
         }
         
         .acc-reset:hover {
-            background-color: #cc0000;
+            background-color: var(--accent-color, #825e3c);
         }
 
-        /* Accessibility Classes */
+        /* Accessibility Elements Improvements */
+        .acc-close {
+            background: #f0f0f0;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #1a1410;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .acc-close:hover {
+            background: var(--accent-color, #825e3c);
+            color: #fff;
+            transform: rotate(90deg);
+        }
+
+        /* Accessibility Classes - Surgical approach */
         html.acc-grayscale { filter: grayscale(100%); }
-        .accessibility-widget { filter: none !important; } /* Stay colorful and visible */
         
-        body.acc-contrast { background: #000 !important; color: #fff !important; }
-        body.acc-contrast * { background: #000 !important; color: #fff !important; border-color: #fff !important; }
-        body.acc-underline a { text-decoration: underline !important; }
-        body.acc-big-cursor { cursor: url('https://cur.cursors-4u.net/others/oth-1/oth1.cur'), auto !important; }
+        /* Professional High Contrast - Black bg, Yellow text (Best for vision) */
+        body.acc-contrast { 
+            background-image: none !important;
+            background-color: #000 !important; 
+            color: #ffff00 !important; 
+        }
+        body.acc-contrast *:not(.acc-btn):not(.acc-sidebar):not(.acc-trigger) { 
+            background-color: transparent !important; 
+            color: #ffff00 !important; 
+            border-color: #ffff00 !important;
+            text-shadow: none !important;
+        }
+
+        body.acc-underline a { text-decoration: underline !important; font-weight: 700 !important; }
+
+        /* Solid Big Cursor using Data URI SVG (Guaranteed to work) */
+        body.acc-big-cursor, body.acc-big-cursor * { 
+            cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 512 512'%3E%3Cpath fill='%231a1410' stroke='%23ffffff' stroke-width='30' d='M160 16v320l64-64 64 160 48-24-64-160h128L160 16z'/%3E%3C/svg%3E"), auto !important; 
+        }
         
-        .acc-font-large { font-size: 1.25rem !important; }
-        .acc-font-xlarge { font-size: 1.5rem !important; }
+        .acc-font-large { font-size: 1.15em !important; }
+        .acc-font-xlarge { font-size: 1.25em !important; }
 
         @media (max-width: 480px) {
             .acc-sidebar { width: 280px; left: -310px; bottom: 90px; }

@@ -452,29 +452,45 @@ function setupEventListeners() {
     checkoutForm.addEventListener('submit', (e) => {
         e.preventDefault();
         const fullName = document.getElementById('fullName').value;
+        const phone = document.getElementById('phone').value.replace(/[-\s]/g, ''); // Remove hyphens/spaces
+        const notes = document.getElementById('orderNotes').value;
         
-        sendToWhatsApp(fullName);
+        // Simple Israeli Mobile Validation
+        const phoneRegex = /^05\d{8}$/;
+        if (!phoneRegex.test(phone)) {
+            alert('נא להזין מספר טלפון נייד תקין (10 ספרות, למשל 0521234567)');
+            return;
+        }
+
+        sendToWhatsApp(fullName, phone, notes);
     });
 }
 
-function sendToWhatsApp(name) {
+function sendToWhatsApp(name, phone, notes) {
     const sellerNumber = "972522436758"; // Lihi Vintage WhatsApp
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     
     let itemsText = cart.map(item => `- ${item.title} | מידה: ${item.size} | ₪${item.price.toFixed(2)}`).join('%0A');
     
-    const message = `*הזמנה חדשה מליהי וינטג'*%0A%0A` +
-                    `*לקוח/ה:* ${name}%0A%0A` +
-                    `*פרטי הזמנה:*%0A${itemsText}%0A%0A` +
-                    `*מחיר כולל:* ₪${total.toFixed(2)}%0A%0A` +
-                    `*תשלום:* אשלם באמצעות Bit.%0A` +
-                    `נא לאשר זמינות לאיסוף מדיזינגוף!`;
+    let message = `*הזמנה חדשה מליהי וינטג'*%0A%0A` +
+                  `*לקוח/ה:* ${name}%0A` +
+                  `*טלפון:* ${phone}%0A%0A` +
+                  `*פרטי הזמנה:*%0A${itemsText}%0A%0A` +
+                  `*מחיר כולל:* ₪${total.toFixed(2)}%0A%0A`;
+
+    if (notes) {
+        message += `*הערות להזמנה:*%0A${notes}%0A%0A`;
+    }
+
+    message += `*תשלום:* אשלם באמצעות Bit.%0A` +
+               `נא לאשר זמינות לאיסוף מדיזינגוף!`;
 
     const whatsappUrl = `https://wa.me/${sellerNumber}?text=${message}`;
     
     cart = [];
     updateCartUI();
     saveCart();
+    displayProducts(); // Reset product buttons
     checkoutModal.style.display = 'none';
     document.body.classList.remove('drawer-open');
     
