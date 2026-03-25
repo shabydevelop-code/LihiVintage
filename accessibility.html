@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הצהרת נגישות | ליהי וינטג'</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .page-content {
+            padding: 40px 0 60px;
+            min-height: 50vh;
+        }
+        .statement-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: var(--card-bg); /* Subtle lift from background */
+            padding: 2rem 4rem 4rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--footer-border); /* Subtle border for structure */
+        }
+        .statement-container h1 {
+            font-size: 3.5rem;
+            margin: 0 0 2rem 0;
+            color: var(--secondary-color); /* Premium Vintage Green */
+            text-align: center;
+        }
+        .statement-container h2 {
+            font-size: 1.8rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+        .statement-container p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+        .statement-container ul {
+            margin: 2rem 0;
+            padding: 0;
+            list-style: none;
+        }
+        .statement-container li {
+            position: relative;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            background: rgba(var(--accent-color-rgb, 130, 94, 60), 0.03);
+            border-right: 3px solid var(--accent-color);
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2rem;
+            transition: var(--transition);
+        }
+        .statement-container li:hover {
+            background: rgba(var(--accent-color-rgb, 130, 94, 60), 0.08);
+            transform: translateX(-5px);
+        }
+        .statement-container li i {
+            font-size: 1.4rem;
+            color: var(--accent-color);
+            margin-top: 0.2rem;
+        }
+        .statement-container li strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-size: 1.25rem;
+        }
+        .statement-container li span {
+            font-size: 1.05rem;
+            color: var(--text-color);
+            line-height: 1.5;
+        }
+        .back-home-link {
+            display: inline-block;
+            margin: 4rem auto 0;
+            padding: 1rem 3rem;
+            color: var(--accent-color);
+            text-decoration: none;
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+        }
+        .back-home-link:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+        .contact-box {
+            background-color: var(--card-bg);
+            padding: 2.5rem;
+            border-right: 4px solid var(--accent-color);
+            margin: 3rem 0;
+            border-radius: var(--border-radius);
+        }
+        .contact-box p {
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
+        @media (max-width: 600px) {
+            .statement-container {
+                padding: 1rem 1.2rem 2.5rem;
+            }
+            .statement-container h1 {
+                font-size: 2.2rem;
+                margin-bottom: 1.5rem;
+            }
+            .page-content {
+                padding: 20px 0 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="החלפת מצב יום/לילה">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="menu-trigger" aria-label="פתיחת תפריט">
+                    <a href="index.html#menu" style="color: inherit;"><i class="fa-solid fa-bars"></i></a>
+                </button>
+                <a href="index.html#cart" class="cart-trigger" aria-label="צפייה בסל הקניות">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-shopping-bag" aria-hidden="true"></i>
+                    </div>
+                </a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">כל הפריטים</a>
+                <a href="index.html?cat=women">נשים</a>
+                <a href="index.html?cat=men">גברים</a>
+                <a href="index.html?cat=accessories">אביזרים</a>
+            </nav>
+            <div class="logo serif"><a href="index.html" style="color: inherit; text-decoration: none;">Lihi Vintage</a></div>
+        </div>
+    </header>
+
+    <main class="page-content container">
+        <article class="statement-container serif">
+            <h1>הצהרת נגישות</h1>
+            <p>אנו שואפים להעניק חוויית קנייה נעימה ושוויונית לכלל לקוחותינו. אנו מאמינים כי האינטרנט צריך להיות זמין ונגיש לכולם, ומחויבים לספק אתר נגיש לקהל הרחב ביותר האפשרי, ללא קשר לנסיבות ויכולות.</p>
+            
+            <p>אנו משקיעים מאמצים רבים בהפיכת האתר לנגיש ונוח לשימוש עבור אנשים עם מוגבלויות פיזיות, חושיות או קוגניטיביות, מתוך אמונה כי הנגישות היא חובה מוסרית וחברתית ראשונה במעלה.</p>
+            
+            <h2>אמצעי הנגישות באתר</h2>
+            <p>אתר זה הונגש בהתאם להוראות הנגישות בתקן הישראלי (ת"י 5568) המבוסס על הנחיות ה-WCAG 2.0 ברמת AA. להלן פירוט ההתאמות שבוצעו:</p>
+            <ul>
+                <li>
+                    <i class="fa-solid fa-keyboard"></i>
+                    <div>
+                        <strong>ניווט מקלדת מלא</strong>
+                        <span>האתר מותאם לניווט מלא באמצעות מקלדת בלבד (Tab/Enter), כולל מעבר לוגי בין רכיבים והדגשה ויזואלית ברורה.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-ear-listen"></i>
+                    <div>
+                        <strong>תמיכה בקוראי מסך</strong>
+                        <span>האתר כולל תיוג סמנטי נכון (Aria Labels) וטקסט חלופי (Alt Text) לתמונות לתמיכה בטכנולוגיות מסייעות.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-circle-half-stroke"></i>
+                    <div>
+                        <strong>ניגודיות וצבעוניות</strong>
+                        <span>הצבעים באתר נבחרו בקפידה ועומדים ביחס ניגודיות גבוה המקל על הקריאה עבור אנשים עם לקויות ראייה.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-mobile-screen-button"></i>
+                    <div>
+                        <strong>רספונסיביות מלאה</strong>
+                        <span>האתר מותאם לצפייה ולשימוש מלא בכל סוגי המסכים, כולל התאמה מיוחדת לטלפונים ניידים וטאבלטים.</span>
+                    </div>
+                </li>
+                <li>
+                    <i class="fa-solid fa-eye-low-vision"></i>
+                    <div>
+                        <strong>סרגל נגישות מתקדם</strong>
+                        <span>האתר כולל סרגל כלים צף המאפשר התאמה אישית של גודל הפונט, מצבי צבע וניווט לפי צרכי המשתמש.</span>
+                    </div>
+                </li>
+            </ul>
+
+            <h2>כיצד ניתן ליצור איתנו קשר</h2>
+            <p>למרות מאמצינו להנגיש את כלל הדפים באתר, ייתכן ויתגלו חלקים שאינם נגישים מספיק. אנו ממשיכים באופן מתמיד במאמצינו לשפר את נגישות האתר כחלק ממחויבותנו לאפשר שימוש בו עבור כלל האוכלוסייה.</p>
+            <p>אם במהלך הגלישה באתר נתקלתם בבעיה בנושא נגישות, או שיש לכם הצעה לשיפור, נשמח לקבל מכם משוב כדי שנוכל לטפל בה בהקדם:</p>
+            
+            <div class="contact-box serif">
+                <p><strong>אחראית נגישות:</strong> ליהי</p>
+                <p><strong>וואטסאפ:</strong> <a href="https://wa.me/972522436758" style="color: var(--accent-color); font-weight: 600;">052-2436758</a></p>
+                <p><strong>אימייל:</strong> <a href="mailto:lihi@vintage.co.il" style="color: inherit; text-decoration: underline;">lihi@vintage.co.il</a></p>
+                <p><strong>עדכון אחרון להצהרה:</strong> מרץ 2024</p>
+            </div>
+
+            <a href="index.html" class="btn btn-primary back-home-link">חזרה לחנות</a>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <div class="footer-logo serif">Lihi Vintage</div>
+                <p>אוצרות של פריטי יד שנייה איכותיים עם מחויבות לאופנה בת-קיימא.</p>
+            </div>
+            <div class="footer-section">
+                <h3>שירות לקוחות</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">חזרה לחנות</a></li>
+                    <li><a href="accessibility.html">הצהרת נגישות</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>נקודת איסוף</h3>
+                <p><i class="fa-solid fa-location-dot"></i> דיזינגוף 101, תל אביב</p>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+    <script>
+        // Simple Theme Setup for Static Pages
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+
+        function setupTheme() {
+            const savedTheme = localStorage.getItem('lihi-theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateThemeIcon(savedTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            if (!themeToggle) return;
+            const icon = themeToggle.querySelector('i');
+            icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('lihi-theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        setupTheme();
+    </script>
+    <script src="accessibility-bar.js"></script>
+</body>
+</html>

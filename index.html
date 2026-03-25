@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ליהי וינטג' | חנות בגדי יד שנייה ווינטג'</title>
+    <meta name="description" content="גלו פריטי וינטג' ובלעדיים בליהי וינטג'. קולקציות שנבחרו בקפידה לנשים וגברים.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <div class="header-actions">
+                <button id="themeToggle" class="theme-toggle" aria-label="החלפת מצב יום/לילה">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="menu-trigger" id="menuTrigger" aria-label="פתיחת תפריט">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <button class="cart-trigger" id="cartTrigger" aria-label="צפייה בסל הקניות">
+                    <div class="cart-icon">
+                        <i class="fa-solid fa-shopping-bag" aria-hidden="true"></i>
+                        <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
+                    </div>
+                </button>
+            </div>
+            <nav class="nav-links">
+                <a href="#" class="filter-link active" data-category="all">כל הפריטים</a>
+                <a href="#" class="filter-link" data-category="women">נשים</a>
+                <a href="#" class="filter-link" data-category="men">גברים</a>
+                <a href="#" class="filter-link" data-category="accessories">אביזרים</a>
+            </nav>
+            <div class="logo serif">Lihi Vintage</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>אלגנטיות על-זמנית</h1>
+            <p>פריטי וינטג' שנבחרו בקפידה ומספרים סיפור. גלו את הפריט האהוב הבא שלכם.</p>
+            <a href="#shop" class="btn-primary">לקולקציה</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container" id="shop">
+        
+        <!-- Category Filters -->
+        <div class="filters" role="group" aria-label="Product categories">
+            <button class="filter-btn active" data-sub="all" aria-pressed="true">הכל</button>
+            <button class="filter-btn" data-sub="tops" aria-pressed="false">חולצות</button>
+            <button class="filter-btn" data-sub="bottoms" aria-pressed="false">מכנסיים</button>
+            <button class="filter-btn" data-sub="outerwear" aria-pressed="false">מעילים</button>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="products-grid" id="productsGrid" aria-label="Products display">
+            <!-- Products will be injected here by JavaScript -->
+        </div>
+
+    </main>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay" role="dialog" aria-modal="true" aria-labelledby="cartHeading">
+        <div class="cart-drawer">
+            <div class="cart-header">
+                <h2 class="serif" id="cartHeading">סל הקניות שלך</h2>
+                <button class="close-cart" id="closeCart" aria-label="סגירת עגלת הקניות">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <div class="cart-items" id="cartItems" aria-live="polite">
+                <!-- Cart items will be injected here -->
+                <p style="text-align: center; color: var(--text-muted); margin-top: 2rem;">הסל שלכם ריק.</p>
+            </div>
+
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>סה"כ</span>
+                    <span id="cartTotal">₪0.00</span>
+                </div>
+                <button class="btn-checkout" id="checkoutBtn">מעבר לתשלום</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div class="modal-overlay" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutHeading">
+        <div class="modal">
+            <button class="close-cart" id="closeModal" style="position: absolute; top: 1rem; left: 1rem;" aria-label="סגירת פרטי הזמנה">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+            <h2 class="serif" id="checkoutHeading">פרטי הזמנה</h2>
+            
+            <div class="payment-info">
+                <i class="fa-solid fa-info-circle"></i>
+                שימו לב: התשלום מתבצע באמצעות אפליקציית <strong>Bit</strong> (העברה ידנית). אנו ניצור עמכם קשר עם הנחיות מדויקות לאחר סיום הרכישה.
+            </div>
+
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="fullName">שם מלא</label>
+                    <input type="text" id="fullName" required placeholder="הזינו את שמכם המלא">
+                </div>
+                <button type="submit" class="btn-checkout">סיום רכישה בוואטסאפ</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <p>אוצרות של פריטי יד שנייה איכותיים עם מחויבות לאופנה בת-קיימא.</p>
+            </div>
+            <div class="footer-section">
+                <h3>שירות לקוחות</h3>
+                <ul class="footer-links">
+                    <li><a href="#">מדיניות משלוחים</a></li>
+                    <li><a href="#">החזרות והחלפות</a></li>
+                    <li><a href="#">מדריך מידות</a></li>
+                    <li><a href="#">צרו קשר</a></li>
+                    <li><a href="accessibility.html">הצהרת נגישות</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>נקודת איסוף</h3>
+                <p><i class="fa-solid fa-location-dot"></i> דיזינגוף 101, תל אביב</p>
+                <p><i class="fa-solid fa-calendar"></i> א'-ה': 10:00 - 19:00</p>
+                <p><i class="fa-solid fa-calendar"></i> יום ו': 09:00 - 15:00</p>
+            </div>
+            <div class="footer-section">
+                <h3>אמצעי תשלום</h3>
+                <p><i class="fa-solid fa-mobile-screen"></i> נתמכים: Bit, מזומן באיסוף</p>
+                <div style="margin-top: 1rem;">
+                    <a href="#" aria-label="בקרו באינסטגרם שלנו"><i class="fa-brands fa-instagram fa-xl" style="margin-left: 1rem;" aria-hidden="true"></i></a>
+                    <a href="#" aria-label="בקרו בפייסבוק שלנו"><i class="fa-brands fa-facebook fa-xl" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container footer-bottom">
+            <p>&copy; 2026 כל הזכויות שמורות.</p>
+        </div>
+    </footer>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay">
+        <div class="mobile-nav-content">
+            <button class="close-mobile-nav" id="closeMobileNav" aria-label="סגירת תפריט">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="mobile-logo">תפריט</div>
+            <nav class="mobile-links">
+                <a href="#" class="mobile-filter-link active" data-category="all">כל הפריטים</a>
+                <a href="#" class="mobile-filter-link" data-category="women">נשים</a>
+                <a href="#" class="mobile-filter-link" data-category="men">גברים</a>
+                <a href="#" class="mobile-filter-link" data-category="accessories">אביזרים</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Script -->
+    <script src="script.js"></script>
+    <script src="accessibility-bar.js"></script>
+</body>
+</html>
