@@ -343,32 +343,52 @@ function removeFromCart(id) {
     displayProducts();
 }
 
-function toggleCart(isOpen) {
+function toggleCart(isOpen, fromPopState = false) {
     if (isOpen) {
         lastFocusedElement = document.activeElement;
         cartOverlay.classList.add('open');
         document.body.classList.add('drawer-open');
+        if (!fromPopState) pushModalState();
         setTimeout(() => {
             closeCart.focus();
         }, 100);
     } else {
         cartOverlay.classList.remove('open');
         document.body.classList.remove('drawer-open');
+        if (!fromPopState && history.state?.modalOpen) history.back();
         if (lastFocusedElement) {
             lastFocusedElement.focus();
         }
     }
 }
 
-function toggleMobileNav(isOpen) {
+function toggleMobileNav(isOpen, fromPopState = false) {
     if (isOpen) {
         mobileNavOverlay.classList.add('open');
         document.body.classList.add('drawer-open');
+        if (!fromPopState) pushModalState();
     } else {
         mobileNavOverlay.classList.remove('open');
         document.body.classList.remove('drawer-open');
+        if (!fromPopState && history.state?.modalOpen) history.back();
     }
 }
+
+function pushModalState() {
+    history.pushState({ modalOpen: true }, '');
+}
+
+window.addEventListener('popstate', (e) => {
+    // Close everything when back is pressed
+    if (cartOverlay.classList.contains('open')) toggleCart(false, true);
+    if (mobileNavOverlay.classList.contains('open')) toggleMobileNav(false, true);
+    if (checkoutModal.style.display === 'flex') {
+        checkoutModal.style.display = 'none';
+        document.body.classList.remove('drawer-open');
+    }
+    // Also trigger accessibility bar close if open
+    window.dispatchEvent(new CustomEvent('closeAccessibilitySidebar'));
+});
 
 function setupEventListeners() {
     // Navigation Links
@@ -424,7 +444,8 @@ function setupEventListeners() {
             return;
         }
         lastFocusedElement = document.activeElement;
-        toggleCart(false);
+        toggleCart(false, true); // Close cart without adding to history (we are about to add one for checkout)
+        pushModalState();
         checkoutModal.style.display = 'flex';
         document.body.classList.add('drawer-open');
         setTimeout(() => {
@@ -435,6 +456,7 @@ function setupEventListeners() {
     closeModal.addEventListener('click', () => {
         checkoutModal.style.display = 'none';
         document.body.classList.remove('drawer-open');
+        if (history.state?.modalOpen) history.back();
         if (lastFocusedElement) {
             lastFocusedElement.focus();
         }
@@ -444,6 +466,7 @@ function setupEventListeners() {
         if (e.target === checkoutModal) {
             checkoutModal.style.display = 'none';
             document.body.classList.remove('drawer-open');
+            if (history.state?.modalOpen) history.back();
             if (lastFocusedElement) lastFocusedElement.focus();
         }
     });

@@ -298,13 +298,22 @@
     
     let fontSizeLevel = 0; // 0, 1, 2
 
-    const toggleSidebar = (forceClose = false) => {
+    const toggleSidebar = (forceClose = false, fromPopState = false) => {
         if (forceClose) {
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
+            if (!fromPopState && history.state?.modalOpen) {
+                history.back();
+            }
         } else {
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
+            
+            if (sidebar.classList.contains('active')) {
+                history.pushState({ modalOpen: true }, '');
+            } else if (!fromPopState && history.state?.modalOpen) {
+                history.back();
+            }
         }
         document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : 'auto';
     };
@@ -312,6 +321,19 @@
     trigger.addEventListener('click', () => toggleSidebar());
     closeBtn.addEventListener('click', () => toggleSidebar(true));
     overlay.addEventListener('click', () => toggleSidebar(true));
+
+    // Support back button on mobile
+    window.addEventListener('popstate', () => {
+        if (sidebar.classList.contains('active')) {
+            toggleSidebar(true, true);
+        }
+    });
+
+    window.addEventListener('closeAccessibilitySidebar', () => {
+        if (sidebar.classList.contains('active')) {
+            toggleSidebar(true, true);
+        }
+    });
 
     const actions = {
         contrast: () => document.body.classList.toggle('acc-contrast'),
