@@ -56,11 +56,11 @@ const FOOTER_HTML = `
 
 const MOBILE_NAV_HTML = `
     <div class="mobile-nav-content">
-        <button class="close-mobile-nav" id="closeMobileNav" aria-label="סגירת תפריט">
-            <i class="fa-solid fa-xmark"></i>
-        </button>
-        <div class="mobile-logo-box">
-            <div class="mobile-logo">תפריט</div>
+        <div class="mobile-nav-header">
+            <h2 class="serif">תפריט</h2>
+            <button class="close-mobile-nav" id="closeMobileNav" aria-label="סגירת תפריט">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
         </div>
         <nav class="mobile-links">
             <a href="{{HOME}}#" class="mobile-filter-link active" data-category="all">כל הפריטים</a>
