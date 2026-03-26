@@ -74,11 +74,8 @@ const MOBILE_NAV_HTML = `
 const SIMPLE_HEADER_HTML = `
     <div class="container header-content">
         <div class="header-actions">
-            <button id="themeToggle" class="theme-toggle" aria-label="החלפת מצב יום/לילה">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-            <a href="index.html" class="back-link" style="margin-right: 1.5rem; color: var(--text-color); font-weight: 600; text-decoration: none;">
-                <i class="fa-solid fa-arrow-right"></i> חזרה לחנות
+            <a href="index.html" class="back-link" style="color: var(--text-color); font-weight: 600; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap;">
+                <i class="fa-solid fa-chevron-right"></i> חזרה לחנות
             </a>
         </div>
         <div class="logo serif"><a href="index.html" style="color: inherit; text-decoration: none;">Lihi Vintage</a></div>
@@ -117,22 +114,23 @@ function injectSharedComponents() {
 }
 
 function setupThemeShared() {
+    const html = document.documentElement;
+    const savedTheme = localStorage.getItem('lihi-theme') || 'light';
+    
+    // Apply theme immediately even if no toggle exists
+    html.setAttribute('data-theme', savedTheme);
+
     const themeToggle = document.getElementById('themeToggle');
     if (!themeToggle) return;
 
-    const html = document.documentElement;
     const icon = themeToggle.querySelector('i');
-
     const updateIcon = (theme) => {
         if (icon) icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     };
 
-    // Correct theme initialization
-    const savedTheme = localStorage.getItem('lihi-theme') || 'light';
-    html.setAttribute('data-theme', savedTheme);
     updateIcon(savedTheme);
 
-    // Click handler
+    // Click handler for index page
     themeToggle.addEventListener('click', () => {
         const currentTheme = html.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
