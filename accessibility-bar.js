@@ -336,7 +336,7 @@
             document.body.style.fontFamily = "";
             fontSizeLevel = 0;
             buttons.forEach(b => b.classList.remove('active'));
-            sidebar.classList.remove('active');
+            toggleSidebar(true);
         }
     };
 
@@ -352,7 +352,7 @@
 
     // Close on escape
     window.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') sidebar.classList.remove('active');
+        if (e.key === 'Escape') toggleSidebar(true);
     });
 
 })();
