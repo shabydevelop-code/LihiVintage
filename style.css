@@ -729,6 +729,12 @@ footer {
     opacity: 0.9;
 }
 
+.footer-info-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--accent-color);
+}
+
 .footer-bottom {
     border-top: 1px solid var(--footer-border);
     padding-top: 1.5rem;
