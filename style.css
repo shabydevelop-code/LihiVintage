@@ -429,7 +429,7 @@ header {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(26, 20, 16, 0.7);
     z-index: 2000;
     opacity: 0;
     visibility: hidden;
@@ -707,40 +707,54 @@ header {
 footer {
     background-color: var(--footer-bg);
     color: var(--footer-text);
-    padding: 5rem 0 2rem;
+    padding: 3rem 0 1.5rem;
 }
 
 .footer-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 3rem;
-    margin-bottom: 3rem;
-}
-
-.footer-logo {
-    font-size: 2.6rem;
-    margin-bottom: 1.5rem;
-    color: var(--footer-text);
-    font-weight: 700;
-    letter-spacing: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .footer-section h3 {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
 }
 
-.footer-links li {
-    margin-bottom: 0.8rem;
+.footer-section p, .footer-links li {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
 }
 
 .footer-bottom {
     border-top: 1px solid var(--footer-border);
-    padding-top: 2rem;
+    padding-top: 1.5rem;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--footer-text);
     opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 2.5rem 0 1.5rem;
+        text-align: center;
+    }
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem 1rem;
+    }
+    .footer-section:first-child {
+        grid-column: span 2;
+        margin-bottom: 1rem;
+    }
+    .footer-section i {
+        display: block;
+        margin-bottom: 0.3rem;
+    }
 }
 
 /* Mobile Nav Overlay Style */
@@ -754,7 +768,7 @@ footer {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(26, 20, 16, 0.7); /* Deeper dimmed warm overlay */
+    background-color: rgba(26, 20, 16, 0.7) !important;
     z-index: 5000;
     opacity: 0;
     visibility: hidden;
@@ -772,42 +786,57 @@ footer {
     right: 0;
     width: 100%;
     height: 100%;
-    background-color: var(--bg-color); /* Correctly use theme background */
-    backdrop-filter: blur(10px);
+    background-color: rgba(26, 20, 16, 0.7);
+    backdrop-filter: none;
     z-index: 4000;
-    padding: 2rem;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-20px);
     transition: var(--transition);
 }
 
 .mobile-nav-overlay.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
 }
 
 .mobile-nav-content {
+    position: fixed;
+    top: 0;
+    right: -280px; /* Slide from right */
+    width: 280px;
+    max-width: 80%;
+    height: 100%;
+    background-color: var(--bg-color);
+    z-index: 4001;
+    padding: 2rem 1.2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3rem;
-    margin-top: 5rem;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15); /* Shadow on the left */
+}
+
+.mobile-nav-overlay.open .mobile-nav-content {
+    right: 0;
 }
 
 .close-mobile-nav {
     position: absolute;
     top: 1.5rem;
-    left: 1.5rem;
-    font-size: 2rem;
+    right: 1.5rem; /* Reversed for drawer context */
+    font-size: 1.8rem;
     color: var(--primary-color);
 }
 
+.mobile-logo-box {
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
 .mobile-logo {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: var(--primary-color);
-    margin-bottom: 2rem;
     font-weight: 700;
     letter-spacing: 1px;
     white-space: nowrap;
@@ -821,8 +850,8 @@ footer {
 }
 
 .mobile-links a {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     text-transform: uppercase;
     padding: 0.5rem 1.5rem;
     border-radius: 50px;
@@ -880,5 +909,118 @@ footer {
     }
     .header-content {
         padding: 0 1rem;
+    }
+}
+/* Toast Notifications */
+.toast-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 15000;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    pointer-events: none;
+}
+
+.toast {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-right: 4px solid var(--accent-color);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 320px;
+    max-width: 90vw;
+    animation: toastIn 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+    pointer-events: auto;
+    backdrop-filter: blur(15px);
+    border: 2px solid var(--accent-color);
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .toast {
+    background-color: rgba(33, 27, 21, 0.95);
+    border-color: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.toast i {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+}
+
+.toast.error {
+    border-right-color: #e53935;
+}
+.toast.error i {
+    color: #e53935;
+}
+
+.toast.success {
+    border-right-color: #43a047;
+}
+.toast.success i {
+    color: #43a047;
+}
+
+.toast.info {
+    border-right-color: #1e88e5;
+}
+.toast.info i {
+    color: #1e88e5;
+}
+
+@keyframes toastIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.toast.fade-out {
+    animation: toastOut 0.4s ease forwards;
+}
+
+@keyframes toastOut {
+    to {
+        transform: translateY(-20px) scale(0.95);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 768px) {
+    .toast-container {
+        top: auto;
+        bottom: 40px; /* Elevated from the bottom for mobile bars */
+        left: 20px;
+        right: 20px;
+        width: auto;
+        transform: none;
+    }
+    .toast {
+        min-width: 100%;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        padding: 1.2rem;
+        font-size: 1.1rem;
+    }
+    @keyframes toastIn {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 }

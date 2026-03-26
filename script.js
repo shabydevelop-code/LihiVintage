@@ -129,6 +129,7 @@ function addToCart(productId) {
     updateCartUI();
     saveCart();
     displayProducts(); // Refresh buttons to show "Already in cart"
+    showToast(`${product.title} נוסף לסל הקניות!`, 'success');
     toggleCart(true);
 }
 
@@ -280,11 +281,14 @@ function setupEventListeners() {
     // Mobile Menu Interactions
     menuTrigger.addEventListener('click', () => toggleMobileNav(true));
     closeMobileNav.addEventListener('click', () => toggleMobileNav(false));
+    mobileNavOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileNavOverlay) toggleMobileNav(false);
+    });
 
     // Checkout Modal
     checkoutBtn.addEventListener('click', () => {
         if (cart.length === 0) {
-            alert("הסל שלכם ריק!");
+            showToast("הסל שלכם ריק!", "error");
             return;
         }
         lastFocusedElement = document.activeElement;
@@ -325,7 +329,7 @@ function setupEventListeners() {
         // Simple Israeli Mobile Validation
         const phoneRegex = /^05\d{8}$/;
         if (!phoneRegex.test(phone)) {
-            alert('נא להזין מספר טלפון נייד תקין (10 ספרות, למשל 0521234567)');
+            showToast('נא להזין מספר טלפון נייד תקין (10 ספרות, למשל 0521234567)', 'error');
             return;
         }
 
@@ -362,4 +366,58 @@ function sendToWhatsApp(name, phone, notes) {
     document.body.classList.remove('drawer-open');
     
     window.open(whatsappUrl, '_blank');
+}
+
+/**
+ * Custom elegant Toast notification system
+ * @param {string} message - The message to display
+ * @param {string} type - 'success', 'error', 'info', 'warning'
+ * @param {number} duration - Milliseconds to show the toast
+ */
+function showToast(message, type = 'info', duration = 3000) {
+    // 1. Ensure container exists
+    let container = document.querySelector('.toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.className = 'toast-container';
+        document.body.appendChild(container);
+    }
+
+    // 2. Create toast element
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    
+    // Select icon based on type
+    let iconClass = 'fa-circle-info';
+    if (type === 'success') iconClass = 'fa-circle-check';
+    if (type === 'error') iconClass = 'fa-circle-exclamation';
+    if (type === 'warning') iconClass = 'fa-triangle-exclamation';
+
+    toast.innerHTML = `
+        <i class="fa-solid ${iconClass}"></i>
+        <div class="toast-message">${message}</div>
+    `;
+
+    // 3. Add to container
+    container.appendChild(toast);
+
+    // 4. Auto-remove
+    const removeToast = () => {
+        if (toast.classList.contains('fade-out')) return; 
+        toast.classList.add('fade-out');
+        setTimeout(() => {
+            toast.remove();
+            if (container.childNodes.length === 0) {
+                container.remove();
+            }
+        }, 500); // Wait for fade-out animation
+    };
+
+    const timeoutId = setTimeout(removeToast, duration);
+
+    // Allow user to click to dismiss
+    toast.addEventListener('click', () => {
+        clearTimeout(timeoutId);
+        removeToast();
+    });
 }
