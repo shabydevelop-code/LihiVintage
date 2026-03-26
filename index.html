@@ -16,32 +16,8 @@
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container header-content">
-            <div class="header-actions">
-                <button id="themeToggle" class="theme-toggle" aria-label="החלפת מצב יום/לילה">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
-                <button class="menu-trigger" id="menuTrigger" aria-label="פתיחת תפריט">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-                <button class="cart-trigger" id="cartTrigger" aria-label="צפייה בסל הקניות">
-                    <div class="cart-icon">
-                        <i class="fa-solid fa-shopping-bag" aria-hidden="true"></i>
-                        <span class="cart-badge" id="cartBadge" aria-live="polite">0</span>
-                    </div>
-                </button>
-            </div>
-            <nav class="nav-links">
-                <a href="#" class="filter-link active" data-category="all">כל הפריטים</a>
-                <a href="#" class="filter-link" data-category="women">נשים</a>
-                <a href="#" class="filter-link" data-category="men">גברים</a>
-                <a href="#" class="filter-link" data-category="accessories">אביזרים</a>
-            </nav>
-            <div class="logo serif">Lihi Vintage</div>
-        </div>
-    </header>
+    <!-- Header (Populated by JS) -->
+    <header></header>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -131,54 +107,14 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container footer-content">
-            <div class="footer-section">
-                <p class="footer-info-text">אוצרות של פריטי יד שנייה איכותיים</p>
-            </div>
-            <div class="footer-section">
-                <h3>שירות לקוחות</h3>
-                <ul class="footer-links">
-                    <li><a href="https://wa.me/972522436758" target="_blank">צרו קשר</a></li>
-                    <li><a href="accessibility.html">הצהרת נגישות</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>נקודת איסוף</h3>
-                <p><i class="fa-solid fa-location-dot"></i> דיזינגוף 101, תל אביב</p>
-                <p><i class="fa-solid fa-calendar"></i> א'-ה': 10:00 - 19:00</p>
-                <p><i class="fa-solid fa-calendar"></i> יום ו': 09:00 - 15:00</p>
-            </div>
-            <div class="footer-section">
-                <h3>אמצעי תשלום</h3>
-                <p><i class="fa-solid fa-mobile-screen"></i> נתמכים: Bit, מזומן באיסוף</p>
-            </div>
-        </div>
-        <div class="container footer-bottom">
-            <p>&copy; 2026 כל הזכויות שמורות.</p>
-        </div>
-    </footer>
+    <!-- Footer (Populated by JS) -->
+    <footer></footer>
 
-    <!-- Mobile Nav Overlay -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay">
-        <div class="mobile-nav-content">
-            <button class="close-mobile-nav" id="closeMobileNav" aria-label="סגירת תפריט">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
-            <div class="mobile-logo-box">
-                <div class="mobile-logo">תפריט</div>
-            </div>
-            <nav class="mobile-links">
-                <a href="#" class="mobile-filter-link active" data-category="all">כל הפריטים</a>
-                <a href="#" class="mobile-filter-link" data-category="women">נשים</a>
-                <a href="#" class="mobile-filter-link" data-category="men">גברים</a>
-                <a href="#" class="mobile-filter-link" data-category="accessories">אביזרים</a>
-            </nav>
-        </div>
-    </div>
+    <!-- Mobile Nav Overlay (Populated by JS) -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
 
-    <!-- Script -->
+    <!-- Scripts -->
+    <script src="shared-components.js"></script>
     <script src="products.js"></script>
     <script src="script.js"></script>
     <script src="accessibility-bar.js"></script>

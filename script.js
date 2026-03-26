@@ -6,31 +6,34 @@ let currentCategory = 'all';
 let currentSubCategory = 'all';
 
 // DOM Elements
-const productsGrid = document.getElementById('productsGrid');
-const cartBadge = document.getElementById('cartBadge');
-const cartItemsContainer = document.getElementById('cartItems');
-const cartTotal = document.getElementById('cartTotal');
-const cartOverlay = document.getElementById('cartOverlay');
-const cartTrigger = document.getElementById('cartTrigger');
-const closeCart = document.getElementById('closeCart');
-const checkoutBtn = document.getElementById('checkoutBtn');
-const checkoutModal = document.getElementById('checkoutModal');
-const closeModal = document.getElementById('closeModal');
-const checkoutForm = document.getElementById('checkoutForm');
-const menuTrigger = document.getElementById('menuTrigger');
-const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-const closeMobileNav = document.getElementById('closeMobileNav');
-const themeToggle = document.getElementById('themeToggle');
+let productsGrid, cartBadge, cartItemsContainer, cartTotal, cartOverlay, cartTrigger, 
+    closeCart, checkoutBtn, checkoutModal, closeModal, checkoutForm, 
+    menuTrigger, mobileNavOverlay, closeMobileNav;
 let lastFocusedElement;
 
 // Initialize
-setupTheme();
 
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize DOM Elements
+    productsGrid = document.getElementById('productsGrid');
+    cartBadge = document.getElementById('cartBadge');
+    cartItemsContainer = document.getElementById('cartItems');
+    cartTotal = document.getElementById('cartTotal');
+    cartOverlay = document.getElementById('cartOverlay');
+    cartTrigger = document.getElementById('cartTrigger');
+    closeCart = document.getElementById('closeCart');
+    checkoutBtn = document.getElementById('checkoutBtn');
+    checkoutModal = document.getElementById('checkoutModal');
+    closeModal = document.getElementById('closeModal');
+    checkoutForm = document.getElementById('checkoutForm');
+    menuTrigger = document.getElementById('menuTrigger');
+    mobileNavOverlay = document.getElementById('mobileNavOverlay');
+    closeMobileNav = document.getElementById('closeMobileNav');
+
+    // 2. Load and Display
     loadCart(); // Restore cart from local storage
     displayProducts();
     setupEventListeners();
-    initThemeIcon();
 });
 
 function saveCart() {
@@ -45,35 +48,6 @@ function loadCart() {
     }
 }
 
-function setupTheme() {
-    const savedTheme = localStorage.getItem('lihi-theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-}
-
-function initThemeIcon() {
-    if (themeToggle) {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        updateThemeIcon(currentTheme);
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('lihi-theme', newTheme);
-            updateThemeIcon(newTheme);
-        });
-    }
-}
-
-function updateThemeIcon(theme) {
-    if (!themeToggle) return;
-    const icon = themeToggle.querySelector('i');
-    if (theme === 'dark') {
-        icon.className = 'fa-solid fa-sun';
-    } else {
-        icon.className = 'fa-solid fa-moon';
-    }
-}
 
 // Functions
 function displayProducts() {
