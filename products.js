@@ -14,7 +14,7 @@
 const products = [
     {
         id: 1,
-        active: true,
+        active: false,
         title: "מעיל טרנץ' וינטג' משנות ה-70",
         category: "women",
         sub: "outerwear",
