@@ -484,6 +484,8 @@ header {
 .cart-items {
     flex: 1;
     overflow-y: auto;
+    padding-left: 1rem; /* Space for scrollbar */
+    padding-right: 0.5rem;
 }
 
 .cart-item {
@@ -524,7 +526,18 @@ header {
     cursor: pointer;
     background: none;
     border: none;
-    padding: 0;
+    padding: 10px; /* Increased touch target for accessibility */
+    margin-left: 15px; /* Separate from scrollbar on left in RTL */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    border-radius: 50%;
+}
+
+.remove-item:hover {
+    background-color: rgba(255, 82, 82, 0.1);
+    transform: scale(1.1);
 }
 
 .cart-footer {

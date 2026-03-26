@@ -312,7 +312,7 @@ function updateCartUI() {
                     <p class="cart-item-size">מידה: ${item.size}</p>
                     <p class="cart-item-price">₪${item.price.toFixed(2)}</p>
                 </div>
-                <button class="remove-item" onclick="removeFromCart(${item.id})" aria-label="הסרת ${item.title} מהסל">
+                <button class="remove-item" onclick="removeFromCart(${item.id})" aria-label="הסרת ${item.title} מהסל" title="הסרת פריט">
                     <i class="fa-solid fa-trash-can" aria-hidden="true"></i>
                 </button>
             </div>
