@@ -6,12 +6,12 @@
 const HEADER_HTML = `
     <div class="container header-content">
         <div class="header-actions">
-            <button id="themeToggle" class="theme-toggle" aria-label="החלפת מצב יום/לילה">
-                <i class="fa-solid fa-moon"></i>
-            </button>
             <button class="menu-trigger" id="menuTrigger" aria-label="פתיחת תפריט">
                 <i class="fa-solid fa-bars"></i>
             </button>
+            <div class="mobile-active-category" id="mobileActiveCategory" style="display: none;">
+                <span id="activeCategoryName">כל הפריטים</span>
+            </div>
             <button class="cart-trigger" id="cartTrigger" aria-label="צפייה בסל הקניות">
                 <div class="cart-icon">
                     <i class="fa-solid fa-shopping-bag" aria-hidden="true"></i>

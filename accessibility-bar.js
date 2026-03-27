@@ -9,25 +9,25 @@
         .accessibility-widget {
             position: fixed;
             bottom: 30px;
-            left: 30px;
+            right: 30px;
             z-index: 10001;
             font-family: 'Assistant', sans-serif;
             direction: rtl;
         }
 
         .acc-trigger {
-            width: 65px;
-            height: 65px;
+            width: 50px;
+            height: 50px;
             background-color: var(--accent-color, #825e3c);
             color: #fff;
             border-radius: 50%;
-            border: 4px solid #fff;
+            border: 3px solid #fff;
             box-shadow: 0 4px 20px rgba(0,0,0,0.2);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 30px;
+            font-size: 24px;
             transition: all 0.3s ease;
         }
 
@@ -56,8 +56,8 @@
 
         .acc-sidebar {
             position: fixed;
-            bottom: 110px;
-            left: -380px;
+            bottom: 95px;
+            right: -380px;
             width: 350px;
             background: #fff;
             border-radius: 12px;
@@ -77,7 +77,7 @@
         }
 
         .acc-sidebar.active {
-            left: 30px;
+            right: 30px;
         }
 
         .acc-header {
@@ -222,9 +222,9 @@
         .acc-font-xlarge { font-size: 1.25em !important; }
 
         @media (max-width: 480px) {
-            .acc-sidebar { width: 280px; left: -310px; bottom: 90px; }
-            .acc-sidebar.active { left: 20px; }
-            .acc-trigger { width: 55px; height: 55px; left: 20px; bottom: 20px; }
+            .acc-sidebar { width: 280px; right: -310px; bottom: 80px; }
+            .acc-sidebar.active { right: 20px; }
+            .acc-trigger { width: 45px; height: 45px; right: 20px; bottom: 20px; font-size: 20px; }
         }
     `;
 
@@ -269,6 +269,10 @@
                 <button class="acc-btn" data-action="readable">
                     <i class="fa-solid fa-eye"></i>
                     פונט קריא
+                </button>
+                <button class="acc-btn" data-action="theme" id="accThemeBtn">
+                    <i class="fa-solid fa-moon"></i>
+                    מצב כהה/בהיר
                 </button>
                 <button class="acc-btn" data-action="statement" id="accStatementBtn">
                     <i class="fa-solid fa-file-contract"></i>
@@ -343,6 +347,13 @@
         readable: () => {
             document.body.style.fontFamily = document.body.style.fontFamily === 'Arial, sans-serif' ? "'Assistant', sans-serif" : 'Arial, sans-serif';
         },
+        theme: () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('lihi-theme', newTheme);
+            updateThemeUI(newTheme);
+        },
         statement: () => window.location.href = "accessibility.html",
         'font-inc': (btn) => {
             fontSizeLevel = (fontSizeLevel + 1) % 3;
@@ -357,15 +368,35 @@
             document.documentElement.classList.remove('acc-grayscale', 'acc-font-large', 'acc-font-xlarge');
             document.body.style.fontFamily = "";
             fontSizeLevel = 0;
+            
+            // Reset Theme
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('lihi-theme', 'light');
+            updateThemeUI('light');
+
             buttons.forEach(b => b.classList.remove('active'));
             toggleSidebar(true);
         }
     };
 
+    const updateThemeUI = (theme) => {
+        const themeBtn = widget.querySelector('#accThemeBtn');
+        if (themeBtn) {
+            const icon = themeBtn.querySelector('i');
+            if (icon) icon.className = theme === 'dark' ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+            themeBtn.classList.toggle('active', theme === 'dark');
+        }
+    };
+
+    // Initial theme setup
+    const savedTheme = localStorage.getItem('lihi-theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    setTimeout(() => updateThemeUI(savedTheme), 10); // Ensure DOM is ready
+
     buttons.forEach(btn => {
         btn.addEventListener('click', () => {
             const action = btn.getAttribute('data-action');
-            if (action !== 'reset' && action !== 'font-inc') {
+            if (action !== 'reset' && action !== 'font-inc' && action !== 'theme') {
                 btn.classList.toggle('active');
             }
             if (actions[action]) actions[action](btn);

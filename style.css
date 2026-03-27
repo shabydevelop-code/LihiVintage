@@ -934,7 +934,40 @@ footer {
         font-size: 1.6rem;
     }
     .header-content {
-        padding: 0 1rem;
+        padding: 0 0.8rem;
+    }
+    .header-actions {
+        gap: 0.8rem;
+    }
+    .mobile-active-category {
+        display: block !important;
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--accent-color);
+        background-color: var(--card-bg);
+        border: 1px solid var(--accent-color);
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        white-space: nowrap;
+        max-width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    @media (max-width: 380px) {
+        .logo {
+            font-size: 1.35rem;
+        }
+        .header-actions {
+            gap: 0.5rem;
+        }
+        .mobile-active-category {
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            max-width: 80px;
+        }
+        .container {
+            padding: 0 0.8rem;
+        }
     }
 }
 /* Toast Notifications */

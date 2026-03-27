@@ -226,10 +226,13 @@ function setupEventListeners() {
             });
             
             currentCategory = category;
+            updateActiveCategoryLabel();
             displayProducts();
             toggleMobileNav(false); // Close mobile nav if open
         });
     });
+
+    updateActiveCategoryLabel(); // Initial call to show initial category
 
     // Sub-category Buttons
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -340,6 +343,20 @@ function sendToWhatsApp(name, phone, notes) {
     document.body.classList.remove('drawer-open');
     
     window.open(whatsappUrl, '_blank');
+}
+
+function updateActiveCategoryLabel() {
+    const label = document.getElementById('activeCategoryName');
+    if (!label) return;
+    
+    const categoryMap = {
+        'all': 'כל הפריטים',
+        'women': 'נשים',
+        'men': 'גברים',
+        'accessories': 'אביזרים'
+    };
+    
+    label.innerText = categoryMap[currentCategory] || 'כל הפריטים';
 }
 
 /**
