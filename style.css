@@ -144,6 +144,11 @@ header {
     padding: 0.2rem 0;
 }
 
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+}
+
 .nav-links a::after {
     content: '';
     position: absolute;
@@ -886,7 +891,7 @@ footer {
 
 .mobile-links a.active {
     background-color: var(--accent-color);
-    color: #1a1410; /* Dark text on active link for contrast */
+    color: #fff; /* Improved contrast for light mode */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -1059,8 +1064,8 @@ footer {
 
 @media (max-width: 768px) {
     .toast-container {
-        top: auto;
-        bottom: 40px; /* Elevated from the bottom for mobile bars */
+        top: 20px;
+        bottom: auto;
         left: 20px;
         right: 20px;
         width: auto;
@@ -1074,7 +1079,7 @@ footer {
     }
     @keyframes toastIn {
         from {
-            transform: translateY(50px);
+            transform: translateY(-50px);
             opacity: 0;
         }
         to {
