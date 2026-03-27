@@ -1,0 +1,24 @@
+{
+  "name": "Lihi Vintage",
+  "short_name": "LihiVtg",
+  "description": "ליהי וינטג' - בוטיק וינטג' של פריטי יד שנייה ייחודיים",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ede4d4",
+  "theme_color": "#825e3c",
+  "dir": "rtl",
+  "lang": "he",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
